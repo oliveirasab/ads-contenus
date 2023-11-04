@@ -1,0 +1,72 @@
+@startuml
+
+class Empresa {
+  + nome: String
+  + funcionarios: List<Funcionario>
+}
+
+class Funcionario {
+  + nome: String
+  + id: Int
+}
+
+class Biblioteca {
+  - funcionarios: List<Funcionario>
+  - publicacoes: List<Publicacao>
+  + adicionarFuncionario(funcionario: Funcionario): void
+  + removerFuncionario(funcionario: Funcionario): void
+  + adicionarPublicacao(publicacao: Publicacao): void
+  + removerPublicacao(publicacao: Publicacao): void
+  + realizarEmprestimo(publicacao: Publicacao, funcionario: Funcionario): Reserva
+  + realizarDevolucao(publicacao: Publicacao): void
+  + verificarReservas(publicacao: Publicacao): void
+}
+
+enum TipoPublicacao {
+  LIVRO
+  REVISTA
+  JORNAL
+}
+
+class Publicacao {
+  + titulo: String
+  + tipo: TipoPublicacao
+  - exemplares: List<Exemplar>
+}
+
+class Exemplar {
+  + numero: Int
+  + status: StatusExemplar
+  + dataDevolucao: Data
+}
+
+enum StatusExemplar {
+  DISPONIVEL
+  EMPRESTADO
+}
+
+class Reserva {
+  - publicacao: Publicacao
+  - funcionario: Funcionario
+  - dataReserva: Data
+  - status: StatusReserva
+  + notificarReserva(): void
+}
+
+enum StatusReserva {
+  PENDENTE
+  NOTIFICADA
+  EXPIRADA
+}
+
+Biblioteca --|> Empresa
+Biblioteca --> Funcionario : Contém
+Biblioteca --> Publicacao : Contém
+Publicacao --> Exemplar : Possui
+Biblioteca --> Reserva : Realiza
+Funcionario --|> Empresa
+Reserva --|> Funcionario
+Reserva --|> Publicacao
+Exemplar --> Reserva : ReservadoPor
+
+@enduml

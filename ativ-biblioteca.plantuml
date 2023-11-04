@@ -1,0 +1,74 @@
+@startuml Biblioteca
+
+    class Biblioteca {
+        matFunc: interger
+        codPublicacao: interger 
+    }
+
+    class Funcionario {
+        nome: string
+        matFunc: Integer
+        realizarEmprestimo: ()
+        realizarReserva: ()
+    }
+
+    class Publicacao {
+        codPublicacao: interger
+        titulo: string
+        anoPublicacao: date
+    }
+
+    class Exemplar {
+        codExemplar: Integer
+        dTdevolucao: date
+        statusExemplar: boolean
+    }
+
+    class Revista {
+        dTpublicacao: date
+        nome: string
+    }
+
+    class Livro {
+        codLivro: interger
+        codISBN: interger
+        titulo: string
+        autor: string
+    }
+
+    class Jornal {
+        codPublcacao: interger
+        tituloMateria: string
+        nomeJornal: string
+        cidadePublcacao: string
+        dTpublicacao: date
+    }
+
+    class Emprestimo {
+        codEmprestimo: interger
+        matFunc: interger
+        dTdevolucao:
+    }
+
+    class Reserva {
+        codPublicacao: interger 
+        matFunc: interger
+        dTreserva: date
+        statusReserva: boolean
+        notificarReserva ()
+        excluirReserva ()
+    }
+
+    Biblioteca "1..*" -- "1..*" Publicacao
+    Biblioteca "1" -- "1..*" Funcionario
+    Biblioteca "1" -- "1..*" Emprestimo
+    Funcionario "1" --* "0..*" Reserva
+    Funcionario "1" --* "1..*" Emprestimo
+    Exemplar "0..*" --* "1..*" Publicacao
+    Emprestimo "1..*" --* "1..*" Exemplar
+    Reserva "1..*" o-- "1" Publicacao
+    Publicacao <|-- Jornal
+    Publicacao <|-- Livro
+    Publicacao <|-- Revista
+    
+@enduml

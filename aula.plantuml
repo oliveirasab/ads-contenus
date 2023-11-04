@@ -1,0 +1,35 @@
+@startuml Model
+
+Class Trem {
+    categoria : String
+    velocidade : Float
+    kmInicial : Float
+    kmFinal : Float
+    localizacao : Float
+    rota : String
+    qtdVagoes : Integer
+
+    reduzirVel() : Void
+    aumentarVel() : Void
+}
+
+Class Vagao {
+    categoria : String
+    qtdPassageiros : Integer
+    qtdCarga : Float
+    motor : String
+    potencia : Float
+    qtdPortas : Integer
+    dtInicio : Date
+
+    verificarCategoria(categoria : String) : Void
+    abrir() : Void
+    fechar() : Void
+}
+
+Trem "1" -- "1..*" Vagao
+
+@enduml
+
+'2021111TADS0189 Rafael Ribeiro da Silva
+'2023211TADS0008 Sabrina Maria Silva Oliveira

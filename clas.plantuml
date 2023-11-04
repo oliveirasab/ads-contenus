@@ -1,0 +1,24 @@
+@startuml Model
+    Class A{
+        Nome
+
+    }
+    Class B{
+        id
+
+    }
+
+    A "0..*" <-- "0..*"B
+
+    Class C{
+
+    }
+
+    Class D {
+
+    }
+
+@enduml
+
+
+' tenho que consultar a documentação para entender como fazer os diagramass
